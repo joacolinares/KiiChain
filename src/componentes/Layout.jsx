@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { ThirdwebProvider } from '../utils/thirdweb.jsx';
 const Layout = ({ children }) => {
   const [background, setBackground] = useState("/image 27.png");
 
@@ -12,14 +12,14 @@ const Layout = ({ children }) => {
       }
     };
 
-    // Ejecutar al inicio y en cada cambio de tamaño
     handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return (
+  return ( 
+  <ThirdwebProvider>
     <div
       className="min-h-screen w-full flex flex-col bg-cover bg-center bg-no-repeat overflow-y-auto"
       style={{
@@ -28,6 +28,7 @@ const Layout = ({ children }) => {
     >
       <div className="w-full max-w-4xl mx-auto flex-grow">{children}</div>
     </div>
+    </ThirdwebProvider>
   );
 };
 

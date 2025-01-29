@@ -2,22 +2,90 @@ import React, { useState, useEffect } from "react";
 import Whitelist from "./Whitelist";
 import { FiEdit } from "react-icons/fi"; // Importamos el ícono de edición
 import { IoPencil } from "react-icons/io5";
+import { PrivateInfoStorage, privateInfoStorageAddress } from "../utils/contracts.ts";
+import { useActiveAccount, useReadContract } from "thirdweb/react";
+import { abiContract } from "../abis/abiContract.tsx";
+import { ethers } from "ethers";
+import { client } from '../utils/constants.ts';
+import { defineChain, prepareContractCall, sendTransaction, waitForReceipt } from "thirdweb";
+import { useSearchParams } from "react-router-dom";
 
 const Whitelist1 = () => {
+  const address = useActiveAccount();
+  const chain = defineChain(137);
+  const [searchParams] = useSearchParams();
+
   const [data, setData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [editableText, setEditableText] = useState("OXV16R34");
+  const [editableText, setEditableText] = useState("Cargando palabra clave...");
+  const isOwner = searchParams.get("isOwner") === "true";
 
-  useEffect(() => {
-    // Simulando un fetch de JSON
-    const fetchData = async () => {
-      const jsonData = {
-        leyenda: "OXV16R34",
-      };
-      setData(jsonData);
-    };
-    fetchData();
-  }, []);
+  const getPrivateInfo = async () => {
+    try {
+      if (!window.ethereum) throw new Error("Metamask not installed");
+  
+      // 📌 Obtener el provider y signer con ethers v6
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner(); // La cuenta conectada en Metamask
+  
+      // 📌 Instancia del contrato con signer
+      const contract = new ethers.Contract(privateInfoStorageAddress, abiContract, signer);
+  
+      // 📌 Obtener la dirección del usuario conectado
+      const userAddress = await signer.getAddress();
+      console.log("Wallet conectada:", userAddress);
+  
+      // 📌 Verificar si la wallet está en la whitelist
+      const isWhitelisted = await contract.isWhitelisted(userAddress);
+      console.log("¿Está en whitelist?", isWhitelisted);
+  
+      if (!isWhitelisted) {
+        throw new Error("Esta wallet no está en la whitelist.");
+      }
+  
+      // 📌 Llamar a getPrivateInfo()
+      const privateInfo = await contract.getPrivateInfo();
+      console.log("Palabra clave obtenida:", privateInfo);
+      setEditableText(privateInfo)
+  
+      return privateInfo;
+    } catch (error) {
+      console.error("Error obteniendo la palabra clave:", error);
+    }
+  };
+  
+useEffect(() => {
+  getPrivateInfo();
+}, [])
+
+
+  const changeText = async() => {
+    if (editableText.trim() === "") return;
+
+
+      const editInfo = prepareContractCall({
+      contract: PrivateInfoStorage,
+      method: "updatePrivateInfo",
+      params: [editableText],
+    });
+
+
+    console.log(address)
+
+    const { transactionHash: editHash } = await sendTransaction({
+      transaction: editInfo,
+      account: address,
+    });
+
+    await waitForReceipt({
+      client: client,
+      chain: chain,
+      transactionHash: editHash,
+    });
+
+    setEditableText(editableText)
+  }
+
 
   // Función para activar edición
   const handleEdit = () => setIsEditing(true);
@@ -110,7 +178,8 @@ const Whitelist1 = () => {
 
              
             
-              <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[110%] max-w-md flex items-center justify-center z-10">
+             {isOwner ? 
+             <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[110%] max-w-md flex items-center justify-center z-10">
                 <div className="bg-violet-900 backdrop-blur-sm bg-opacity-10 border border-white border-opacity-20 text-gray-200 p-4 rounded-2xl shadow-2xl w-full h-32 flex flex-col justify-center space-y-3">
                   <div className="flex items-center justify-center space-x-2">
                     {isEditing ? (
@@ -133,11 +202,26 @@ const Whitelist1 = () => {
                       </p>
                     )}
                   </div>
-                  <button className="w-full py-2 bg-violet-500 bg-opacity-30 backdrop-blur-lg text-white text-sm rounded-full hover:bg-opacity-50">
+                  <button onClick={() =>{changeText()}} className="w-full py-2 bg-violet-500 bg-opacity-30 backdrop-blur-lg text-white text-sm rounded-full hover:bg-opacity-50">
                     Actualizar
                   </button>
                 </div>
               </div>
+              :
+             <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[110%] max-w-md flex items-center justify-center z-10">
+                <div className="bg-violet-900 backdrop-blur-sm bg-opacity-10 border border-white border-opacity-20 text-gray-200 p-4 rounded-2xl shadow-2xl w-full h-32 flex flex-col justify-center space-y-3">
+                  <div className="flex items-center justify-center space-x-2">
+                      <input
+                        type="text"
+                        value={editableText}
+                        className="text-lg bg-transparent text-center text-white outline-none  focus:border-violet-500"
+                        disabled
+                      />
+                  </div>
+                </div>
+              </div>
+              
+            }
             </div>
           </div>
         </div>
