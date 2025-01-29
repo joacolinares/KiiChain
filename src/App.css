@@ -1,0 +1,156 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+body {
+  height: auto;
+  overflow-y: auto;
+}
+
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+input,
+textarea {
+  position: relative;
+  overflow: hidden;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@keyframes logoFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animación para el botón */
+@keyframes buttonSlideIn {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo para el botón con borde degradado */
+.bordeDegradado {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: transparent;
+  border: 2px solid transparent;
+  /* Borde transparente */
+  border-radius: 12px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* El ícono dentro del botón */
+.bordeDegradado img {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+/* Efecto de hover en el botón */
+.bordeDegradado:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Borde degradado, ajustando el borde inferior a transparente */
+.bordeDegradado:before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(to bottom, rgba(128, 128, 128, 1) 0%, rgba(128, 128, 128, 0) 100%);
+  border-radius: 14px;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Efecto de hover para resaltar el borde */
+.bordeDegradado:hover:before {
+  background: linear-gradient(to bottom, rgba(192, 192, 192, 1) 0%, rgba(192, 192, 192, 0) 100%);
+}
