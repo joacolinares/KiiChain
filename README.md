@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# 🚀 Aplicación de Whitelist - KiiChain  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bienvenido a la aplicación de **Whitelist de KiiChain**.  
+Esta es una aplicación web desarrollada en **React con Vite**, que permite a los usuarios verificar si están en la whitelist, ver la palabra clave y, si son administradores, gestionar la whitelist y modificar la palabra clave.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📌 Configuración y ejecución local  
 
-### `npm start`
+Para ejecutar la aplicación en tu entorno local, sigue estos pasos:  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### **1️⃣ Clonar el repositorio**  
+```sh
+git clone <https://github.com/joacolinares/KiiChain>
+cd <KIICHAIN>
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **2️⃣ Instalar dependencias**  
+```sh
+yarn install
+```
 
-### `npm test`
+### **3️⃣ Ejecutar la aplicación**  
+```sh
+yarn run start
+```
+Esto iniciará un servidor de desarrollo en `http://localhost:5173/` o `http://localhost:3000/` (puerto predeterminado de Vite).  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📡 Contrato Inteligente  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+El contrato inteligente que gestiona la whitelist está desplegado en **Polygon**.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **📍 Dirección del contrato:**  
+  `0x22B5991F5D3b912fd6C3b130b0A0B533B3A968BB`  
+- **🔗 Ver en Polygonscan:**  
+  [Ver contrato en Polygonscan](https://polygonscan.com/address/0x22B5991F5D3b912fd6C3b130b0A0B533B3A968BB#code)  
+- **👑 Dirección del Owner (Administrador):**  
+  `0xab1d8De7b5F66FE3107AECD30D4f8C238C953BD3`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🌍 Aplicación desplegada  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Puedes acceder a la aplicación en línea en **Vercel**:  
+🔗 **[KiiChain Whitelist - Aplicación en Vercel](https://kii-chain.vercel.app)**  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🔧 Tecnologías utilizadas  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Frontend:** React + Vite + Tailwind CSS  
+- **Blockchain:** Solidity, Ethers.js, Thirdweb SDK  
+- **Red de Prueba:** Polygon  
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 💡 Funcionalidades  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+✅ Verifica si una dirección está en la whitelist  
+✅ Obtiene la palabra clave si la wallet está en la whitelist  
+✅ Permite que el owner administre la whitelist (agregar/eliminar direcciones)  
+✅ Permite que el owner modifique la palabra clave  
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
