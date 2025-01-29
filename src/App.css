@@ -121,7 +121,7 @@ textarea {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(169, 70, 255, 0.4); /* Fucsia/Violeta */
 }
 
 /* El ícono dentro del botón */
@@ -144,10 +144,9 @@ textarea {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(to bottom, rgba(128, 128, 128, 1) 0%, rgba(128, 128, 128, 0) 100%);
-  border-radius: 14px;
+  background: linear-gradient(to bottom, rgba(169, 70, 255, 1) 0%, rgba(236, 47, 114, 0) 100%);  border-radius: 14px;
   z-index: -1;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.8s ease-in-out;
 }
 
 /* Efecto de hover para resaltar el borde */

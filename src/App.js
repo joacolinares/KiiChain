@@ -19,8 +19,9 @@ function App() {
       <Layout>
         <ToastContainer />
         <Routes>
-          <Route path="/showcase" element={<Showcase />} /> {/* ver todas las vistas */}
-          <Route path="/" element={<LoginScreen />} />
+          {/* ver todas las vistas */}
+          <Route path="/" element={<Showcase />} />
+          <Route path="/login" element={<LoginScreen />} />{" "}
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/wallet" element={<WalletScreen />} />
           <Route path="/whitelist1" element={<Whitelist1 />} />
