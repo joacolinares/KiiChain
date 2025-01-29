@@ -24,32 +24,20 @@ const Whitelist = () => {
   const isOwner = searchParams.get("isOwner") === "true";
 
   const address = useActiveAccount();
-  const userWallet = address?.address 
-
-    // const { data: getWhitelistAddresses } = useReadContract({ //Aca lo deje en balanceOf y no getUserNFTs() ya que es mas rapido, cuando hay mas tipos de perfumes debe ser getUserNFTs()
-    //   contract: PrivateInfoStorage,
-    //   method: "getWhitelistAddresses",
-    //   params: [],
-    // });
-
-   
 
     const getWhitelistwWallets = async () => {
       try {
         if (!window.ethereum) throw new Error("Metamask not installed");
     
-        // 📌 Obtener el provider y signer con ethers v6
         const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner(); // La cuenta conectada en Metamask
+        const signer = await provider.getSigner();
     
-        // 📌 Instancia del contrato con signer
         const contract = new ethers.Contract(privateInfoStorageAddress, abiContract, signer);
     
-        // 📌 Obtener la dirección del usuario conectado
+       
         const userAddress = await signer.getAddress();
         console.log("Wallet conectada:", userAddress);
     
-        // 📌 Verificar si la wallet está en la whitelist
         const isOwner = await contract.owner();
         console.log("¿Está en whitelist?", isOwner);
     
@@ -57,7 +45,6 @@ const Whitelist = () => {
           throw new Error("Esta wallet no es Owner.");
         }
     
-        // 📌 Llamar a getPrivateInfo()
         const getWhitelistAddresses = await contract.getWhitelistAddresses();
         console.log("Whitelist:", getWhitelistAddresses);
        
@@ -82,15 +69,12 @@ const Whitelist = () => {
       getWhitelistwWallets()
     }, []);
 
-  // Abrir/Cerrar modal
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
-  // Buscar en la whitelist
   const filteredData = whitelistData.filter((item) =>
     item.wallet.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Función para eliminar un usuario de la lista localmente
   const handleDelete = async(index) => {
     console.log("handleDelete")
       console.log(index)
@@ -214,7 +198,6 @@ const Whitelist = () => {
           )}
         </div>
 
-        {/* Modal con `react-modal` */}
         <Modal
           isOpen={isModalOpen}
           onRequestClose={toggleModal}
@@ -231,7 +214,6 @@ const Whitelist = () => {
             </button>
           </div>
 
-          {/* Input para agregar wallet */}
           <input
             type="text"
             placeholder="Write the address"
@@ -240,7 +222,6 @@ const Whitelist = () => {
             className="w-full p-2 bg-transparent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none"
           />
 
-          {/* Botón de guardar */}
           <button
             onClick={handleAddWallet}
             className="w-full mt-4 p-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition"

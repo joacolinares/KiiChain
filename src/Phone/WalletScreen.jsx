@@ -87,7 +87,6 @@ const WalletScreen = () => {
     />
            </div>
           
-           {/* Separador suave entre los elementos, con un ancho menor al 100% */}
            {index !== walletData.length - 1 && (
              <hr className="border-t border-gray-600 w-11/12 mx-auto mb-0" />
            )}
